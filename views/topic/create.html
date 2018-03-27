@@ -11,7 +11,7 @@
   <section class="container">
   <div class="row">
     <div class="col-md-5">
-      <form>
+      <form id="form">
         <div class="form-group">
           <label for="exampleInputEmail1">选择板块</label>
           <select class="form-control">
@@ -23,11 +23,11 @@
         </div>
         <div class="form-group">
           <label for="exampleInputEmail1">标题</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+          <input type="email" name="title" class="form-control" id="exampleInputEmail1" placeholder="Email">
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">内容</label>
-          <textarea class="form-control" rows="3"></textarea>
+          <textarea name="content" class="form-control" rows="3"></textarea>
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
@@ -37,6 +37,19 @@
   {{include '../_includes/footer.html'}}
   <script src="/node_modules/jquery/dist/jquery.js"></script>
   <script src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+  <script>
+    $('#form').on('submit',handleSubmit);
+
+    function handleSubmit(e){
+      e.preventDefault();
+      var formData = $(this).serialize();
+      console.log(formData);
+
+      $.post('/topic/create',formData,function(data){
+        console.log(data);
+      })
+    }
+  </script>
 </body>
 
 </html>
